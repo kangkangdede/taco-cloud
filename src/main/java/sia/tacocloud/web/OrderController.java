@@ -35,7 +35,7 @@ public class OrderController {
             return "orderForm";
         }
 
-        log.info("Order submitted: {}", order);
+        log.info("Order submitted: {}", order); // show in console
 
         sessionStatus.setComplete();
 
