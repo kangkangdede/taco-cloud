@@ -1,9 +1,11 @@
 package sia.tacocloud.web;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import sia.tacocloud.Ingredient;
+import sia.tacocloud.data.IngredientRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +13,16 @@ import java.util.Map;
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-    private Map<String, Ingredient> ingredientMap = new HashMap<>();
+    //private Map<String, Ingredient> ingredientMap = new HashMap<>();
 
-    public IngredientByIdConverter(){
+    private IngredientRepository ingredientRepo;
+
+    @Autowired
+    public IngredientByIdConverter(IngredientRepository ingredientRepo){
+
+        this.ingredientRepo = ingredientRepo;
+
+        /*
         ingredientMap.put("FLTO", new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
         ingredientMap.put("COTO", new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP));
 
@@ -29,10 +38,15 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
         ingredientMap.put("SLSA", new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
         ingredientMap.put("SRCR", new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
 
+         */
+
+
     }
 
     @Override
     public Ingredient convert(String id) {
-        return ingredientMap.get(id);
+        //return ingredientMap.get(id);
+
+        return ingredientRepo.findById(id).orElse(null);
     }
 }

@@ -9,19 +9,23 @@ Init Spring Boot Project
 
 ## Chapter 2 
 
-SpringMVC
+SpringMVC  
 Controller
-Init html
-Form
-Submit
-Validation
+Init html template  
+Form  
+Submit  
+Validation  
 
 WebMvcConfigurer
 
 ## Chapter 3
 
 SpringData JDBC
-DB
+DB: H2 Database  
+Repository Class  
+Create table - schema.sql  
+Insert Data - data.sql  
+
 
 
 
