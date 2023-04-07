@@ -77,7 +77,9 @@ public class DesignTacoController {
     }
 
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {
-        return ingredients.stream().filter(x->x.getType().equals(type)).collect(Collectors.toList());
+        return ingredients.stream()
+                .filter(x->x.getType().equals(type)) // x -> x.getType() ????
+                .collect(Collectors.toList());
     }
 
 
@@ -85,10 +87,15 @@ public class DesignTacoController {
     public String processTaco(@Valid Taco taco, Errors errors,
                               @ModelAttribute TacoOrder tacoOrder){
 
+        log.info("save design taco"); // show in console
+
         if(errors.hasErrors()){
             return "design";
         }
         tacoOrder.addTaco(taco);
+
+
+
         log.info("Processing taco: {}", taco); // show in console
 
         return "redirect:/orders/current";

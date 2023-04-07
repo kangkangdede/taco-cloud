@@ -8,12 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import sia.tacocloud.TacoOrder;
+import sia.tacocloud.data.OrderRepository;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+
+    private OrderRepository orderRepo;
+
+    public OrderController(OrderRepository orderRepo){
+        this.orderRepo = orderRepo;
+    }
+
     @GetMapping("/current")
     public String orderForm(){
         // Url http://localhost:8080/orders/current
@@ -31,11 +39,18 @@ public class OrderController {
                                Errors errors,
                                SessionStatus sessionStatus){
 
+        log.info("orderRepo save order 1");
+
         if(errors.hasErrors()){
             return "orderForm";
         }
 
-        log.info("Order submitted: {}", order); // show in console
+        //log.info("Order submitted: {}", order); // show in console
+
+        log.info("orderRepo save order");
+        orderRepo.save(order);
+
+        log.info("orderRepo save order ok");
 
         sessionStatus.setComplete();
 
